@@ -12,5 +12,6 @@ Ok so i wanted to make a matrix board project for half life week 4(ig) but every
 - i'll be using this to display and track my packages like for example lets say im receiving a Fedex order , i dont wanna open the website and enter my tracking number everytime to check for updates so im making a Package tracker to automatically fetch the details and display it on the Led Matrix board
 - But....no one is gonna get packages all the time so what happens to the Display when you are not expecting any package? it will display a spiral spinning or your name or anything you enter on the website
 -YES I'll be making a website to control what you display on the display
-  so wht i did today? worked on the schematic a bit and added the BOM to Readme 
-**Total time spent :2.5hrs**
+so wht i did today? worked on the schematic a bit and added the BOM to Readme
+   
+**Total time spent:2.5hrs**
