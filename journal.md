@@ -15,3 +15,10 @@ Ok so i wanted to make a matrix board project for half life week 4(ig) but every
 so wht i did today? worked on the schematic a bit and added the BOM to Readme
    
 **Total time spent:2.5hrs**
+## Nov 1 2026 <finished the schematic>
+i finished the schematic in kicad  <img width="954" height="581" alt="image" src="https://github.com/user-attachments/assets/89f7c980-d633-4784-84b9-9d2032cff4ab" /><img width="479" height="423" alt="image" src="https://github.com/user-attachments/assets/53616fae-d0a7-4b34-a1b0-a4aba40432a4" /><img width="466" height="505" alt="image" src="https://github.com/user-attachments/assets/8228733f-cc31-42f8-aa44-260988d779c0" /><img width="673" height="441" alt="image" src="https://github.com/user-attachments/assets/0afe552e-2de1-4b1d-80de-cacaa4938cfe" />
+
+**Total Time Spent:1.7hrs**
+
+
+
