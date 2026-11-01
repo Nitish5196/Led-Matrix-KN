@@ -1,4 +1,8 @@
 # Led Matrix KN 
+
+## Schematic 
+<img width="920" height="523" alt="image" src="https://github.com/user-attachments/assets/4f65131b-bc37-4b21-8ed3-483351f68873" />
+
 ### Bill of Materials (BOM)
 
 | Part | Quantity | Price (USD) | Vendor | Link |
