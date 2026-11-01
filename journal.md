@@ -20,5 +20,14 @@ i finished the schematic in kicad  <img width="954" height="581" alt="image" src
 
 **Total Time Spent:1.7hrs**
 
+## Nov 1 2026<firmware>
+ok so i have no idea on how to host on a server so i finished the firmware for esp32 first on ardunio IDE , i kept the esp32 firmware simple and ill be using the website and its server for the api fetching and stuff
+so i searched online for free tracking api and found 3 websites , 1.Ship24 2.AfterShip both of which was NOT free and didnt give me an API key but 3. Trackcourier.io was free and gave me an API key so my local host is running thanks to that. and i have never done this before , i have hosted a server on Nest for my slack bot but i followed the guide line by line so idk much abt it but after creating a server.js index.html and .env file(so my api doesnt get leaked) the local host is up and running but i had to fix a lot of silly errors since its my first time so i spent most of the time debbuing so the website is just pure slop rn ill change it soon , its AI slop only to check if the API works and it does .
+Im plannign to use more than 1 api key so if one hits the limit/doest work it move to the next one automatically 
+here is the images <img width="1125" height="573" alt="image" src="https://github.com/user-attachments/assets/f8d53279-6d67-43ad-bd44-9ae50dbe72f2" />
+<img width="916" height="346" alt="image" src="https://github.com/user-attachments/assets/43e87203-5843-4101-9d68-a17c4df65410" />
+<img width="452" height="125" alt="image" src="https://github.com/user-attachments/assets/184fb309-3c82-4625-bf5e-5520a886d216" />
+<img width="628" height="319" alt="image" src="https://github.com/user-attachments/assets/cd85e05f-32c2-4479-8056-33b91cdba693" />
+**TOtal time spent:4.8hrs**
 
 
