@@ -170,3 +170,13 @@ app.get('/matrix', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Matrix Dashboard running locally at http://localhost:${PORT}`);
 });
+
+if (process.env.VERCEL) {
+  const serverless = require('serverless-http');
+  module.exports = serverless(app);
+} else {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Matrix Dashboard running locally at http://localhost:${PORT}`);
+  });
+}
