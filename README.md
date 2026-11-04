@@ -1,7 +1,7 @@
 # Led Matrix KN 
 A Smart 64x64 LED Matrix board , connect the ESP32 and the Martrix board by referring to the schematic given below and hang it on your wall, when you have a package incoming you enter the transportation service provider's name and enter your tracking number in the custom shipment tracking website . and that's it your led matrix board will show the update on your shipment , but it consumes a lot of power so it cant always stay on . thats why i added a sound detector sensor so it only lights up when you clap and after 10secs goes back to sleep . But you wont be expecting a shipment all the time so what will it display during that time? ANYTHING YOU WANT , you can upload/paste any image of your choice in the custom website and it will be displayed in the matrix . dont know what to upload ? you can enter a prompt in the website's image generator and display the generated image on the Matrix board.
 More updates and customization on the Website will be done soon!!
-Link to Website: coming soon!!
+Link to Website: coming soon!! ( the source code is in the repo but im not able to host it anywhere as of now)
 
 ## Website 
 <img width="1262" height="564" alt="image" src="https://github.com/user-attachments/assets/6c49cbbb-7876-4387-b24d-514601f6d14d" />
