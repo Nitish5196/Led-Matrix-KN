@@ -30,4 +30,8 @@ here is the images <img width="1125" height="573" alt="image" src="https://githu
 <img width="628" height="319" alt="image" src="https://github.com/user-attachments/assets/cd85e05f-32c2-4479-8056-33b91cdba693" />
 **TOtal time spent:4.8hrs**
 
-
+## Nov 4 2026<server>
+Ok so nest servers take time and Nest is down rn so i went with vercel (since i have never done this before , this was all new to me) after following yt tutorials i got THIS- <img width="699" height="485" alt="image" src="https://github.com/user-attachments/assets/11809720-6396-43eb-a428-6a759aedfc48" />
+😭
+after cryin for a while nest came back online but it will take a while for it too get approved ig so idk wht to do ;/ , ill edit the readme and add the BOM.csv now . ill see what i can do about hosting the server
+**Total Time Spent:1.6hrs**
