@@ -35,3 +35,7 @@ Ok so nest servers take time and Nest is down rn so i went with vercel (since i 
 😭
 after cryin for a while nest came back online but it will take a while for it too get approved ig so idk wht to do ;/ , ill edit the readme and add the BOM.csv now . ill see what i can do about hosting the server
 **Total Time Spent:1.6hrs**
+## Nov 5 2026 <Bom and readme>
+so i added the BOM and updated the readme 
+
+**Total time Spent:0.3hrs**
