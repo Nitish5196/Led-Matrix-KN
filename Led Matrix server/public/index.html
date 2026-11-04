@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LED Matrix Shipment Tracker - Orph Edition</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+
+  setInterval(async () => {
+    try {
+      const res = await fetch('/matrix');
+      if (!res.ok) throw new Error(`Server returned status ${res.status}`);
+      
+      const data = await res.json();
+      const canvas = document.getElementById('matrixCanvas');
+      const ctx = canvas.getContext('2d');
+      const status = document.getElementById('previewStatus');
+
+      if (data.type === 'text') {
+     
+        ctx.fillStyle = '#1a1412';
+        ctx.fillRect(0, 0, 64, 64);
+        
+        ctx.fillStyle = '#ffb088';
+        ctx.font = '5px monospace';
+        ctx.fillText("MATRIX TEXT", 4, 18);
+        
+        
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '4px monospace';
+        const textToShow = data.content || "READY";
+        ctx.fillText(textToShow.substring(0, 25), 4, 32);
+        if(textToShow.length > 25) {
+          ctx.fillText(textToShow.substring(25, 50), 4, 40);
+        }
+
+        status.innerText = `Active: Text (${data.carrier || 'MSG'})`;
+      } 
+      else if (data.type === 'image' && data.pixels) {
+        
+        const binaryString = atob(data.pixels);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+
+        const imgData = ctx.createImageData(64, 64);
+        let byteIndex = 0;
+        for (let i = 0; i < imgData.data.length; i += 4) {
+          imgData.data[i]     = bytes[byteIndex];    
+          imgData.data[i + 1] = bytes[byteIndex + 1];
+          imgData.data[i + 2] = bytes[byteIndex + 2];
+          imgData.data[i + 3] = 255;                 
+          byteIndex += 3;
+        }
+
+        ctx.putImageData(imgData, 0, 0);
+        status.innerText = `Active: 64x64 Image 🖼️`;
+      }
+    } catch (err) {
+      console.error("Preview fetch error:", err);
+      document.getElementById('previewStatus').innerText = `Connection error (check console)`;
+    }
+  }, 1000);
+</script>
+</head>
+<body>
+
+  <h1>LED Matrix Shipment Tracker</h1>
+
+  <div class="dashboard-grid">
+
+   
+    <div class="orph-card">
+      <h3 style="margin-top:0; color:#8a6555;">Orph </h3>
+      <img src="orph.png" alt="Orpheus holding package" class="orph-mascot"
+      <p style="font-size:0.85rem; color:#614a3e; margin-bottom:0;">"Always delivering packages on time!" ~ Orph </p>
+    </div>
+
+    
+    <div>
+      <div class="card">
+        <div class="input-wrapper" id="inputWrapper">
+          <img src="truck.png" alt="Delivery Truck" class="truck-img">
+          
+          <select id="carrierSelect">
+            <option value="bluedart">Blue Dart</option>
+            <option value="dtdc">DTDC</option>
+            <option value="delhivery">Delhivery</option>
+            <option value="speedpost">India Post (SpeedPost)</option>
+            <option value="fedex">FedEx</option>
+            <option value="dhl">DHL</option>
+            <option value="ups">UPS</option>
+          </select>
+
+          <input type="text" id="trackingInput" placeholder="Enter tracking number..." onkeydown="if(event.key === 'Enter') fetchTracking()">
+        </div>
+        <button onclick="fetchTracking()">Fetch & Send to Matrix</button>
+      </div>
+
+      
+      <div class="shelf-container">
+        <div class="shelf-title">
+          <span> Package Shelf (Max 5 items)</span>
+          <span id="shelfCount">0 / 5</span>
+        </div>
+        <div id="widgetsContainer"></div>
+      </div>
+    </div>
+
+   
+    <div>
+      <div class="card">
+        <h3 style="margin-top:0; font-size:1rem; color:#8a6555;"> Upload or Paste Image</h3>
+        <div class="dropzone" onclick="document.getElementById('imageInput').click()">
+           Click to upload or <b>Ctrl+V</b> to paste image here!
+        </div>
+        <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleFileSelect(event)">
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0; font-size:1rem; color:#8a6555;"> AI Generator</h3>
+        <textarea id="aiPromptInput" placeholder="e.g. Orpheus dinosaur holding a glowing package..." rows="3" style="resize:none; border-radius:12px; padding:10px;"></textarea>
+        <button onclick="generateAIImage()" style="background:#8a6555;">Generate via Hack Club AI</button>
+      </div>
+    </div>
+    
+<div class="card">
+  <h3 style="margin-top:0; font-size:1rem; color:#8a6555;"> Preview</h3>
+  <div style="background: #000; padding: 10px; border-radius: 12px; display: inline-block; border: 2px dashed #e8c8b8;">
+    
+    <canvas id="matrixCanvas" width="64" height="64" style="width: 200px; height: 200px; image-rendering: pixelated; display: block;"></canvas>
+  </div>
+  <p id="previewStatus" style="font-size: 0.8rem; color: #8a6555; margin-top: 8px;">Waiting for payload...</p>
+</div>
+
+  </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    loadSavedWidgets();
+
+    window.addEventListener('paste', (e) => {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            sendImageToBase64API(event.target.result, "Pasted Image sent to matrix!");
+          };
+          reader.readAsDataURL(blob);
+          break;
+        }
+      }
+    });
+  });
+
+  async function fetchTracking() {
+    let saved = JSON.parse(localStorage.getItem('trackedPackages') || '[]');
+    if (saved.length >= 5) {
+      alert("Shelf is full! (Max 5 packages). Remove an old package using 'X' to add a new one.");
+      return;
+    }
+
+    const carrier = document.getElementById('carrierSelect').value;
+    const trackingNumber = document.getElementById('trackingInput').value.trim();
+    const inputWrapper = document.getElementById('inputWrapper');
+
+    if (!trackingNumber) {
+      alert("Please enter a tracking number!");
+      return;
+    }
+
+    inputWrapper.classList.add('searching');
+
+    try {
+      const response = await fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ carrier, trackingNumber })
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        saveWidgetData({ carrier: carrier.toUpperCase(), text: result.display.content });
+        document.getElementById('trackingInput').value = '';
+      } else {
+        alert(`ERROR: ${result.message}`);
+      }
+    } catch (err) {
+      alert(`NETWORK ERROR: ${err.message}`);
+    } finally {
+      inputWrapper.classList.remove('searching');
+    }
+  }
+
+  function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      sendImageToBase64API(e.target.result, "Uploaded image sent to matrix!");
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function sendImageToBase64API(base64Data, successMsg) {
+    try {
+      const response = await fetch('/api/convert-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageBase64: base64Data })
+      });
+      const result = await response.json();
+      alert(successMsg);
+    } catch (err) {
+      alert(`Image processing failed: ${err.message}`);
+    }
+  }
+
+  async function generateAIImage() {
+    const prompt = document.getElementById('aiPromptInput').value.trim();
+    if (!prompt) {
+      alert("Please enter a prompt for Hack Club AI!");
+      return;
+    }
+
+    alert("Generating AI image via Hack Club AI... Please wait.");
+
+    try {
+      const response = await fetch('/api/generate-ai-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
+      });
+      const result = await response.json();
+      if (result.status === 'success') {
+        alert(result.message);
+        document.getElementById('aiPromptInput').value = '';
+      } else {
+        alert(`AI Error: ${result.message}`);
+      }
+    } catch (err) {
+      alert(`NETWORK ERROR: ${err.message}`);
+    }
+  }
+
+  function saveWidgetData(packageObj) {
+    let saved = JSON.parse(localStorage.getItem('trackedPackages') || '[]');
+    if (saved.length >= 5) {
+      alert("Shelf is full! Max 5 packages allowed.");
+      return;
+    }
+    saved.push(packageObj);
+    localStorage.setItem('trackedPackages', JSON.stringify(saved));
+    renderWidgets();
+  }
+
+  function loadSavedWidgets() {
+    renderWidgets();
+  }
+
+  function renderWidgets() {
+    const container = document.getElementById('widgetsContainer');
+    const shelfCount = document.getElementById('shelfCount');
+    container.innerHTML = '';
+    let saved = JSON.parse(localStorage.getItem('trackedPackages') || '[]');
+
+    shelfCount.innerText = `${saved.length} / 5`;
+
+    if (saved.length === 0) {
+      container.innerHTML = `<div style="text-align: center; color: #8a6555; font-family: monospace; font-size: 0.85rem; padding: 15px;">Shelf is empty. Add a package above! 📦</div>`;
+      return;
+    }
+
+    saved.forEach((pkg, index) => {
+      const widget = document.createElement('div');
+      widget.className = 'tracking-widget';
+      widget.draggable = true;
+      
+      widget.innerHTML = `
+        <div><span class="carrier-badge">${pkg.carrier || 'PKG'}</span> ${pkg.text}</div>
+        <button class="close-btn" onclick="removeWidget(${index})">&times;</button>
+      `;
+
+      widget.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', index);
+      });
+
+      widget.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+
+      widget.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const draggedIndex = e.dataTransfer.getData('text/plain');
+        reorderWidgets(draggedIndex, index);
+      });
+
+      container.appendChild(widget);
+    });
+  }
+
+  function removeWidget(index) {
+    let saved = JSON.parse(localStorage.getItem('trackedPackages') || '[]');
+    saved.splice(index, 1);
+    localStorage.setItem('trackedPackages', JSON.stringify(saved));
+    renderWidgets();
+  }
+
+  function reorderWidgets(fromIndex, toIndex) {
+    let saved = JSON.parse(localStorage.getItem('trackedPackages') || '[]');
+    const [movedItem] = saved.splice(fromIndex, 1);
+    saved.splice(toIndex, 0, movedItem);
+    localStorage.setItem('trackedPackages', JSON.stringify(saved));
+    renderWidgets();
+  }
+</script>
+
+</body>
+</html>

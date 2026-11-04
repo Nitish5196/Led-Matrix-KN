@@ -1,0 +1,26 @@
+{
+  "name": "led-matrix-kn",
+  "version": "1.0.0",
+  "description": "<img width=\"920\" height=\"523\" alt=\"image\" src=\"https://github.com/user-attachments/assets/4f65131b-bc37-4b21-8ed3-483351f68873\" />",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nitish5196/Led-Matrix-KN.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Nitish5196/Led-Matrix-KN/issues"
+  },
+  "homepage": "https://github.com/Nitish5196/Led-Matrix-KN#readme",
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "sharp": "^0.35.5"
+  }
+}
