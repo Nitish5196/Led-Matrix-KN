@@ -1,9 +1,9 @@
 ---
 title: "Led-Matrix-KN"
 github: "https://github.com/Nitish5196/Led-Matrix-KN"
-description: "  "
+description: " A smart 64x64 LED MATRIX BOARD "
 created_at: "2026-10-31"
-total_time: "hrs"
+total_time: "11hrs"
 ---
 ## Oct 31 2026 <started working on it>
 Ok so i wanted to make a matrix board project for half life week 4(ig) but every matrix board online in robu , amazon and robocraze was around $30 which is way over my budget so i though of giving up and choosing a oled display project but then i found a matrix board for under $20 from a sketchy ah website so i decided to work on my original idea .
@@ -28,14 +28,19 @@ here is the images <img width="1125" height="573" alt="image" src="https://githu
 <img width="916" height="346" alt="image" src="https://github.com/user-attachments/assets/43e87203-5843-4101-9d68-a17c4df65410" />
 <img width="452" height="125" alt="image" src="https://github.com/user-attachments/assets/184fb309-3c82-4625-bf5e-5520a886d216" />
 <img width="628" height="319" alt="image" src="https://github.com/user-attachments/assets/cd85e05f-32c2-4479-8056-33b91cdba693" />
+
 **TOtal time spent:4.8hrs**
 
 ## Nov 4 2026<server>
 Ok so nest servers take time and Nest is down rn so i went with vercel (since i have never done this before , this was all new to me) after following yt tutorials i got THIS- <img width="699" height="485" alt="image" src="https://github.com/user-attachments/assets/11809720-6396-43eb-a428-6a759aedfc48" />
 😭
 after cryin for a while nest came back online but it will take a while for it too get approved ig so idk wht to do ;/ , ill edit the readme and add the BOM.csv now . ill see what i can do about hosting the server
+
 **Total Time Spent:1.6hrs**
+
 ## Nov 5 2026 <Bom and readme>
 so i added the BOM and updated the readme 
+<img width="1361" height="556" alt="image" src="https://github.com/user-attachments/assets/57cb5988-61d2-4d9e-b61e-344e8e0103f7" />
+<img width="902" height="577" alt="image" src="https://github.com/user-attachments/assets/f8a62088-38c1-4afa-bf33-43ccf3ab6787" />
 
 **Total time Spent:0.3hrs**
